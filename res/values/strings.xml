@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Ribbon</string>
+
+    <string name="title_section_user">User ID</string>
+    <string name="title_section_ribbon">Ribbon</string>
+    <string name="title_section_network">Network ID</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_exit">Exit</string>
+
+</resources>

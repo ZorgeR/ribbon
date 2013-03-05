@@ -10,4 +10,8 @@
     <string name="action_settings">Settings</string>
     <string name="action_exit">Exit</string>
 
+    <string name="label_disconnect">Disconnect</string>
+    <string name="label_connect">Connect</string>
+
+
 </resources>

@@ -1,6 +1,7 @@
 package com.zlab.ribbon;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -39,6 +40,8 @@ public class Ribbon_Main extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings: {
+                Intent i = new Intent(getApplicationContext(), Ribbon_Worker_Twitter.class);
+                startActivity(i);
                 return true;
             }
             case R.id.action_exit:{

@@ -1,21 +1,29 @@
 package com.zlab.ribbon;
 
+import android.graphics.drawable.Drawable;
+
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Ribbon_Elements {
     private String username;
     private String userid;
     private String messagetype;
+    private String message;
     private String network;
-    private long postdate;
+    private String postdate;
+    private Date postDate;
+    private Drawable avatar;
 
-    public Ribbon_Elements(String username, String userid, String messagetype, String network, long postdate)
+    public Ribbon_Elements(String Username, String UserID, Drawable Avatar, String Message, String MessageType, String Network, Date Postdate)
     {
-        username = username;
-        userid = userid;
-        messagetype = messagetype;
-        network = network;
-        postdate = postdate;
+        username = Username;
+        userid = UserID;
+        avatar = Avatar;
+        message = Message;
+        messagetype = MessageType;
+        network = Network;
+        postDate = Postdate;
     }
 
     public String getUserName()
@@ -25,6 +33,12 @@ public class Ribbon_Elements {
     public String getUserID()
     {
         return userid;
+    }
+    public Drawable getAvatar(){
+        return avatar;
+    }
+    public String getMessage(){
+        return message;
     }
     public String getMessageType()
     {
@@ -37,6 +51,7 @@ public class Ribbon_Elements {
     public String getDate()
     {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm',' d MMM'.'");
-        return sdf.format(postdate);
+        postdate = sdf.format(postDate);
+        return postdate;//sdf.format(postdate);
     }
 }

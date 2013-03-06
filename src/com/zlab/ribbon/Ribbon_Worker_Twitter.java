@@ -1,50 +1,39 @@
 package com.zlab.ribbon;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import twitter4j.*;
-import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.List;
 
 public class Ribbon_Worker_Twitter extends Activity implements OnClickListener {
-    private static final String TAG = "Ribbon:";
-
     private Button buttonLogin;
     private Button getTweetButton;
-    private TextView tweetText;
+    public TextView tweetText;
     private ScrollView scrollView;
 
-    public static Twitter twitter;
-    public static RequestToken requestToken;
-    public static SharedPreferences mSharedPreferences;
+    protected static SharedPreferences mSharedPreferences;
     private static TwitterStream twitterStream;
     private boolean running = false;
-    static Context mTContext;
-    public static AccessToken accessToken;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        mTContext = this;
-
-        mSharedPreferences = getSharedPreferences(cons_twitter.PREFERENCE_NAME, MODE_PRIVATE);
+        mSharedPreferences = getSharedPreferences(twitter_constant.PREFERENCE_NAME, MODE_PRIVATE);
         scrollView = (ScrollView)findViewById(R.id.scrollView2);
         tweetText =(TextView)findViewById(R.id.tweetText);
         getTweetButton = (Button)findViewById(R.id.getTweet);
@@ -53,51 +42,45 @@ public class Ribbon_Worker_Twitter extends Activity implements OnClickListener {
         buttonLogin.setOnClickListener(this);
 
         Uri uri = getIntent().getData();
-        if (uri != null && uri.toString().startsWith(cons_twitter.CALLBACK_URL)) {
-            String verifier = uri.getQueryParameter(cons_twitter.IEXTRA_OAUTH_VERIFIER);
-            new Ribbon_OAuth_Twitter2(this).execute(verifier);
+        if (uri != null && uri.toString().startsWith(twitter_constant.CALLBACK_URL)) {
+            String verifier = uri.getQueryParameter(twitter_constant.IEXTRA_OAUTH_VERIFIER);
+            //new twitter_accessToken(this).execute(verifier);
         }
     }
 
     protected void onResume() {
         super.onResume();
 
-        if (isConnected()) {
-            String oauthAccessToken = mSharedPreferences.getString(cons_twitter.PREF_KEY_TOKEN, "");
-            String oAuthAccessTokenSecret = mSharedPreferences.getString(cons_twitter.PREF_KEY_SECRET, "");
+        if (/*isConnected()*/1>0) {
+            String oauthAccessToken = mSharedPreferences.getString(twitter_constant.PREF_KEY_TOKEN, "");
+            String oAuthAccessTokenSecret = mSharedPreferences.getString(twitter_constant.PREF_KEY_SECRET, "");
 
             ConfigurationBuilder confbuilder = new ConfigurationBuilder();
             Configuration conf = confbuilder
-                    .setOAuthConsumerKey(cons_twitter.CONSUMER_KEY)
-                    .setOAuthConsumerSecret(cons_twitter.CONSUMER_SECRET)
+                    .setOAuthConsumerKey(twitter_constant.CONSUMER_KEY)
+                    .setOAuthConsumerSecret(twitter_constant.CONSUMER_SECRET)
                     .setOAuthAccessToken(oauthAccessToken)
                     .setOAuthAccessTokenSecret(oAuthAccessTokenSecret)
                     .build();
             twitterStream = new TwitterStreamFactory(conf).getInstance();
+            //new twitter_build_list(this).execute("");
 
             buttonLogin.setText(R.string.label_disconnect);
             getTweetButton.setEnabled(true);
+
         } else {
             buttonLogin.setText(R.string.label_connect);
         }
     }
 
-    private boolean isConnected() {
-        boolean connect = mSharedPreferences.getString(cons_twitter.PREF_KEY_TOKEN, null) != null;
-        return connect;
-    }
-
     private void askOAuth() {
-        new Ribbon_OAuth_Twitter(this).execute();
+        //new twitter_requestToken(this).execute();
     }
 
-    /**
-     * Remove Token, Secret from preferences
-     */
     private void disconnectTwitter() {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.remove(cons_twitter.PREF_KEY_TOKEN);
-        editor.remove(cons_twitter.PREF_KEY_SECRET);
+        editor.remove(twitter_constant.PREF_KEY_TOKEN);
+        editor.remove(twitter_constant.PREF_KEY_SECRET);
 
         editor.commit();
     }
@@ -106,7 +89,7 @@ public class Ribbon_Worker_Twitter extends Activity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.twitterLogin:
-                if (isConnected()) {
+                if (/*isConnected()*/1>0) {
                     disconnectTwitter();
                     buttonLogin.setText(R.string.label_connect);
                 } else {

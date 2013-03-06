@@ -22,15 +22,18 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".Ribbon_Worker_Twitter"
+                android:name=".Ribbon_oAuth"
                 android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="oauth" android:host="t4jribbon"/>
+                <data android:scheme="oauth" android:host="ribbontwitter"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".Ribbon_oAuthBrowser"
+                android:theme="@android:style/Theme.NoTitleBar" />
     </application>
 
 </manifest>

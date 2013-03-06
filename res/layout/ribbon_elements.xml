@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:padding="5dp">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RealUserName"
+            android:id="@+id/textRealUserName"
+            android:layout_toRightOf="@+id/imgAvatar" android:layout_below="@+id/textUserName"
+            android:textSize="10dp" android:paddingLeft="5dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="timestamp"
+            android:id="@+id/textTimeStamp"
+            android:textSize="10dp" android:textColor="#888888"
+            android:layout_alignLeft="@+id/imgAvatar" android:layout_below="@+id/textMessage"
+            />
+    <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/imgAvatar" android:src="@drawable/default_twitter"
+            android:background="@drawable/avatar_podium"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message"
+            android:id="@+id/textMessage"
+            android:layout_alignLeft="@+id/imgAvatar" android:layout_below="@+id/imgAvatar"
+            android:autoLink="phone|email|web"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserName"
+            android:id="@+id/textUserName" android:layout_toRightOf="@+id/imgAvatar"
+            android:layout_alignTop="@+id/imgAvatar" android:textStyle="bold" android:paddingLeft="5dp"/>
+</RelativeLayout>

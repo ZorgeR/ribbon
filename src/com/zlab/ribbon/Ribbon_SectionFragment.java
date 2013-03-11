@@ -33,6 +33,7 @@ public class Ribbon_SectionFragment extends Fragment {
 
         if(pageID == Ribbon_Main.TAB_RIBBON){
             ribbon_list = (ListView) rootView.findViewById(R.id.listRow);
+            ribbon_list.setDividerHeight(0);
 
             if(ribbon_listelements!=null){
                 adaptor = new Ribbon_ListElemetsAdaptor(Ribbon_Main.mContext,R.layout.ribbon_elements,ribbon_listelements);

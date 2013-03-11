@@ -2,23 +2,25 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" android:padding="5dp">
+                android:layout_height="fill_parent" android:background="@drawable/message2">
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="RealUserName"
             android:id="@+id/textRealUserName"
-            android:layout_toRightOf="@+id/imgAvatar" android:layout_below="@+id/textUserName"
-            android:textSize="10dp" android:paddingLeft="5dp"/>
+            android:textSize="10dp" android:paddingLeft="3dp"
+            android:layout_alignParentEnd="false" android:layout_alignParentStart="false"
+            android:layout_alignWithParentIfMissing="false" android:layout_alignParentRight="false"
+            android:singleLine="true"
+            android:layout_alignParentTop="true" android:layout_toRightOf="@+id/textUserName" android:paddingTop="3dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="timestamp"
             android:id="@+id/textTimeStamp"
             android:textSize="10dp" android:textColor="#888888"
-            android:layout_alignLeft="@+id/imgAvatar" android:layout_below="@+id/textMessage"
-            />
+            android:paddingLeft="3dp" android:layout_alignParentRight="true" android:layout_alignTop="@+id/imgAvatar"/>
     <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -29,12 +31,13 @@
             android:layout_height="wrap_content"
             android:text="Message"
             android:id="@+id/textMessage"
-            android:layout_alignLeft="@+id/imgAvatar" android:layout_below="@+id/imgAvatar"
-            android:autoLink="phone|email|web"/>
+            android:autoLink="phone|email|web" android:paddingLeft="2dp"
+            android:layout_toRightOf="@+id/imgAvatar" android:layout_below="@+id/textUserName"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UserName"
             android:id="@+id/textUserName" android:layout_toRightOf="@+id/imgAvatar"
-            android:layout_alignTop="@+id/imgAvatar" android:textStyle="bold" android:paddingLeft="5dp"/>
+            android:layout_alignTop="@+id/imgAvatar" android:textStyle="bold" android:paddingLeft="2dp"
+            android:singleLine="true"/>
 </RelativeLayout>

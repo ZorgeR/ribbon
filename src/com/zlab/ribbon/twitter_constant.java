@@ -16,5 +16,5 @@ public class twitter_constant {
     static final String IEXTRA_OAUTH_VERIFIER = "oauth_verifier";
     static final String IEXTRA_OAUTH_TOKEN = "oauth_token";
 
-    public static Paging TWITTER_PAGING = new Paging(1,15);
+    public static Paging TWITTER_PAGING = new Paging(1,40);
 }

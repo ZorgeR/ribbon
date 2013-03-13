@@ -39,6 +39,7 @@ public class Ribbon_SectionFragment extends Fragment {
                 adaptor = new Ribbon_ListElemetsAdaptor(Ribbon_Main.mContext,R.layout.ribbon_elements,ribbon_listelements);
                 ribbon_list.setAdapter(adaptor);
             } else {
+                Ribbon_Main.updateAdaptors();
                 //new twitter_requestToken(new Ribbon_Worker_Twitter()).execute();
                 /* TODO Пустой список */
             }

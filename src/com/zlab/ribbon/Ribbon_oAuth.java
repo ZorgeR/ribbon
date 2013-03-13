@@ -28,7 +28,8 @@ public class Ribbon_oAuth extends Activity {
             Ribbon_oAuthBrowser.oAuth_Browser_State.finish();
             if(uri.toString().startsWith(twitter_constant.CALLBACK_URL)) {
                 String verifier = uri.getQueryParameter(twitter_constant.IEXTRA_OAUTH_VERIFIER);
-                new twitter_accessToken(this).execute(verifier);
+                Ribbon_Main.setAccessToken(verifier);
+                finish();
             }
 
             /* TODO Добавить Другие сети

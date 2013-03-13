@@ -3,12 +3,17 @@ package com.zlab.ribbon;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import twitter4j.Twitter;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
@@ -30,12 +35,13 @@ public class Ribbon_Main extends FragmentActivity {
     static final int FACEBOOK = 2;
 
     /** НАСТРОЙКИ **/
-    public static SharedPreferences oAuthSharedPreferences;
+    private static SharedPreferences oAuthSharedPreferences;
 
     /** TWITTER **/ /* TODO Сделать Private и добавить методы setter и getter */
-    public static Twitter twitter;
-    public static RequestToken requestToken;
-    public static AccessToken accessToken;
+    //private static Twitter twitter;
+    private static RequestToken requestToken;
+    //private static AccessToken accessToken;
+    public static String TokenVerifier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +58,7 @@ public class Ribbon_Main extends FragmentActivity {
         mViewPager.setAdapter(mRibbonPagerAdapter);
         mViewPager.setCurrentItem(1);
 
-        updateAdaptors();
+        /**updateAdaptors();**/
     }
 
     @Override
@@ -78,11 +84,13 @@ public class Ribbon_Main extends FragmentActivity {
 
     public static void updateAdaptors(){
         if(!isConnected("twitter") && !isConnected("facebook")){
-            Intent i = new Intent(Ribbon_Main.mActivity.getApplicationContext(), Ribbon_oAuth.class);
-            Ribbon_Main.mActivity.startActivity(i);
+            Intent i = new Intent(mActivity.getApplicationContext(), Ribbon_oAuth.class);
+            mActivity.startActivity(i);
         } else {
             if(isConnected("twitter")){
-                new twitter_build_list(Ribbon_Main.mActivity).execute("");
+                String oauthAccessToken = oAuthSharedPreferences.getString(twitter_constant.PREF_KEY_TOKEN, "");
+                String oAuthAccessTokenSecret = oAuthSharedPreferences.getString(twitter_constant.PREF_KEY_SECRET, "");
+                new twitter_build_list(mActivity).execute(oauthAccessToken,oAuthAccessTokenSecret);
             }
         }
     }
@@ -91,7 +99,7 @@ public class Ribbon_Main extends FragmentActivity {
         return oAuthSharedPreferences.getString(network+"_oauth_token", null) != null;
     }
     public static void setTwitter(int network_id, Twitter tw){
-        twitter = tw;
+        //twitter = tw;
     }
     public static void setTwitterRequestToken(int network_id, RequestToken rt){
         requestToken = rt;
@@ -101,6 +109,25 @@ public class Ribbon_Main extends FragmentActivity {
         e.putString(twitter_constant.PREF_KEY_TOKEN, token);
         e.putString(twitter_constant.PREF_KEY_SECRET, secrettoken);
         e.commit();
+    }
+    public static void setAccessToken(String verifier){
+        if(requestToken!=null){
+            TokenVerifier=verifier;
+            new twitter_accessToken(mActivity).execute(requestToken);
+        }
+    }
+    public static void notify_toast(String msg,String type){
+        Toast toast = Toast.makeText(mActivity, msg, Toast.LENGTH_LONG);
+        View toast_rootview = toast.getView();
+        TextView text = (TextView) toast_rootview.findViewById(android.R.id.message);
+
+        if(type.equals("error")){
+            text.setTextColor(Color.RED);
+        }
+
+        text.setShadowLayer(0,0,0,0);
+
+        toast.show();
     }
 
 }

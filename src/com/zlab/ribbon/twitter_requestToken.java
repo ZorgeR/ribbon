@@ -49,18 +49,21 @@ public class twitter_requestToken extends AsyncTask<String, Void, RequestToken> 
 
     protected void onPostExecute(RequestToken result) {
         super.onPostExecute(result);
-
-        Ribbon_Main.setTwitter(Ribbon_Main.TWITTER,twitter);
+        if(requestToken!=null){
+        //Ribbon_Main.setTwitter(Ribbon_Main.TWITTER,twitter);
         Ribbon_Main.setTwitterRequestToken(Ribbon_Main.TWITTER,requestToken);
-                            /*
+        /*
         Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(requestToken.getAuthenticationURL()));
         activity.startActivity(intent);    */
 
         Intent intent = new Intent(activity, Ribbon_oAuthBrowser.class);
         intent.putExtra("uri", requestToken.getAuthenticationURL());
         activity.startActivity(intent);
+        } else {
+            Ribbon_Main.notify_toast(Ribbon_Main.mContext.getResources().getString(R.string.notify_connection_error),"error");
+        }
         progress.dismiss();
-                           /*
+        /*
         WebView twitterSite = new WebView(this);
         twitterSite.loadUrl();
 

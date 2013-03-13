@@ -38,8 +38,8 @@ public class twitter_build_list extends AsyncTask<String, Void, List<twitter4j.S
 
     @Override
     protected List<twitter4j.Status> doInBackground(String... params) {
-        String oauthAccessToken = Ribbon_Main.oAuthSharedPreferences.getString(twitter_constant.PREF_KEY_TOKEN, "");
-        String oAuthAccessTokenSecret = Ribbon_Main.oAuthSharedPreferences.getString(twitter_constant.PREF_KEY_SECRET, "");
+        String oauthAccessToken = params[0];
+        String oAuthAccessTokenSecret = params[1];
 
         ConfigurationBuilder confbuilder = new ConfigurationBuilder();
         Configuration conf = confbuilder

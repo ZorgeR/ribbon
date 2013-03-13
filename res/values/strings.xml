@@ -13,5 +13,6 @@
     <string name="label_disconnect">Disconnect</string>
     <string name="label_connect">Connect</string>
 
+    <string name="notify_connection_error">Connection error!</string>
 
 </resources>

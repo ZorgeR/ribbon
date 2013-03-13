@@ -10,7 +10,6 @@
             android:text="RealUserName"
             android:id="@+id/textRealUserName"
             android:textSize="10dp" android:paddingLeft="3dp"
-            android:layout_alignParentEnd="false" android:layout_alignParentStart="false"
             android:layout_alignWithParentIfMissing="false" android:layout_alignParentRight="false"
             android:singleLine="true"
             android:layout_alignParentTop="true" android:layout_toRightOf="@+id/textUserName" android:paddingTop="3dp"/>

@@ -35,6 +35,7 @@ public class twitter_requestToken extends AsyncTask<String, Void, RequestToken> 
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
         configurationBuilder.setOAuthConsumerKey(twitter_constant.CONSUMER_KEY);
         configurationBuilder.setOAuthConsumerSecret(twitter_constant.CONSUMER_SECRET);
+        configurationBuilder.setUseSSL(true);
         Configuration configuration = configurationBuilder.build();
         twitter = new TwitterFactory(configuration).getInstance();
 

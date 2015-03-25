@@ -19,10 +19,11 @@ public class Ribbon_oAuthBrowser extends Activity {
         oAuth_Browser_State = ((Ribbon_oAuthBrowser) Ribbon_oAuthBrowser.oAuth_Browser_Context);
         //Uri uri = getIntent().getData();
         Uri uri = Uri.parse(getIntent().getExtras().getString("uri"));
+
         if (uri != null){
             webView = (WebView) findViewById(R.id.webView1);
             webView.getSettings().setJavaScriptEnabled(true);
-            webView.loadUrl(uri.toString());
+            webView.loadUrl(uri.toString().replace("http://","https://"));
         } else {
             finish();
         }

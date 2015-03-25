@@ -95,6 +95,12 @@ public class Ribbon_Main extends FragmentActivity {
         }
     }
 
+    public static void updTwitter(){
+        String oauthAccessToken = oAuthSharedPreferences.getString(twitter_constant.PREF_KEY_TOKEN, "");
+        String oAuthAccessTokenSecret = oAuthSharedPreferences.getString(twitter_constant.PREF_KEY_SECRET, "");
+        new twitter_build_list(mActivity).execute(oauthAccessToken,oAuthAccessTokenSecret);
+    }
+
     public static boolean isConnected(String network) {
         return oAuthSharedPreferences.getString(network+"_oauth_token", null) != null;
     }

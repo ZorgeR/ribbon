@@ -57,7 +57,7 @@ public class Ribbon_ListElemetsAdaptor extends ArrayAdapter<Ribbon_Elements> {
 
         if(items.size()==position+1){
             twitter_constant.TWITTER_PAGING.setPage(twitter_constant.TWITTER_PAGING.getPage()+1);
-            new twitter_build_list(Ribbon_Main.mActivity).execute("");
+            Ribbon_Main.updTwitter();
         }
 
         if (o != null) {
